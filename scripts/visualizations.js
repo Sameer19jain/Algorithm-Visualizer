@@ -28,13 +28,34 @@ var c_delay=0;//This is updated ov every div change so that visualization is vis
 function div_update(cont,height,color)
 {
     window.setTimeout(function(){
-        cont.style=" margin:0% " + margin_size + "%; width:" + (100/array_size-(2*margin_size)) + "%; height:" + height + "%; background-color:" + color + ";";
+        if (!isPaused) {
+            cont.style=" margin:0% " + margin_size + "%; width:" + (100/array_size-(2*margin_size)) + "%; height:" + height + "%; background-color:" + color + "; border-radius: 3px 3px 0 0; transition: all 0.2s ease;";
+            
+            // Play sound based on color (action type)
+            if (color === "yellow") {
+                comparisons++;
+                playNote(200 + height * 5, 0.1);
+            } else if (color === "red") {
+                swaps++;
+                playNote(400 + height * 5, 0.1);
+            } else if (color === "green") {
+                playNote(600 + height * 5, 0.15);
+            }
+            
+            arrayAccesses++;
+            updateStats();
+        }
     },c_delay+=delay_time);
 }
 
 function enable_buttons()
 {
     window.setTimeout(function(){
+        stopTimer();
+        pauseBtn.disabled=true;
+        pauseBtn.innerText = "Pause";
+        isPaused = false;
+        
         for(var i=0;i<butts_algos.length;i++)
         {
             butts_algos[i].classList=[];

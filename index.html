@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sorting Visualizer</title>
+    <title>Sorting Visualizer - Interactive Algorithm Learning</title>
 
     <link rel="stylesheet" href="./css/style.css">
 
@@ -17,8 +17,20 @@
             <div class="array-inputs">
                 <p>Size of the array:</p>
                 <input id="a_size" type="range" min=20 max=150 step=1 value=80>
+                <p id="size_display">Size: 80</p>
+                
                 <p>Speed of the algorithm:</p>
                 <input id="a_speed" type="range" min=1 max=5 step=1 value=4>
+                <p id="speed_display">Speed: Fast</p>
+                
+                <p>Array type:</p>
+                <select id="array_type" class="array-type-select">
+                    <option value="random">Random</option>
+                    <option value="nearly_sorted">Nearly Sorted</option>
+                    <option value="reversed">Reversed</option>
+                    <option value="few_unique">Few Unique</option>
+                </select>
+                
                 <button id="a_generate">Generate New Array!</button>
             </div>
 
@@ -37,6 +49,32 @@
 
         </nav>
     </header>
+
+    <div class="stats-container">
+        <div class="stat-item">
+            <span class="stat-label">Comparisons</span>
+            <span class="stat-value" id="comparisons">0</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-label">Array Accesses</span>
+            <span class="stat-value" id="arrayAccess">0</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-label">Swaps</span>
+            <span class="stat-value" id="swaps">0</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-label">Time Elapsed</span>
+            <span class="stat-value" id="timeElapsed">0s</span>
+        </div>
+    </div>
+
+    <div class="control-buttons">
+        <button class="control-btn pause" id="pauseBtn" disabled>Pause</button>
+        <button class="control-btn reset" id="resetBtn">Reset Stats</button>
+        <button class="control-btn sound" id="soundBtn">Sound: ON</button>
+        <button class="control-btn theme" id="themeBtn">🌙 Dark Theme</button>
+    </div>
 
     <section>
 
@@ -86,12 +124,18 @@
 
     </section>
 
+    <div class="algo-description" id="algoDescription">
+        <h4>Select an algorithm to see its description</h4>
+        <p>Click on any sorting algorithm button above to start visualizing and learning how it works!</p>
+    </div>
+
     <footer>
 
     </footer>
 
     <script src="./scripts/main.js"></script>   <!--This should be at the end of body and should be loaded before sorts.js-->
     <script src="./scripts/visualizations.js"></script>  <!--This should be loaded after main.js-->
+    <script src="./scripts/algo_descriptions.js"></script>  <!--Algorithm descriptions-->
 
     <script src="./scripts/bubble_sort.js"></script>
     <script src="./scripts/selection_sort.js"></script>
